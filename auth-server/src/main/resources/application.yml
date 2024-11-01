@@ -18,6 +18,8 @@ spring:
 server:
   port: 7001
 
+rsa:
+  key: ${RSA_KEY}
 prefix:
   api: ${PREFIX_SERVER}
 

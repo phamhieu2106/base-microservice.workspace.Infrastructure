@@ -14,9 +14,6 @@ dependencies {
     implementation project(path: ':workspace:shared:shared-redis', configuration: 'default')
     implementation project(path: ':workspace:shared:shared-auth', configuration: 'default')
     implementation project(path: ':workspace:auth-service:auth-shared', configuration: 'default')
-
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
-    implementation 'org.springframework.security:spring-security-oauth2-jose'
 }
 
 test {
