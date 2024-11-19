@@ -1,6 +1,6 @@
 package com.henry.function;
 
-import com.henry.base.service.func.BaseFunc;
+import com.henry.base.func.BaseFunc;
 import com.henry.domain.SignInRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

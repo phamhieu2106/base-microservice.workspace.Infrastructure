@@ -1,6 +1,6 @@
 package com.henry.domain;
 
-import com.henry.base.service.request.BaseRequest;
+import com.henry.base.domain.request.BaseRequest;
 import com.henry.constant.AuthErrorCode;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
