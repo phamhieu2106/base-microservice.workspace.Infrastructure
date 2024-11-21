@@ -2,8 +2,10 @@ package com.henry.controller;
 
 import com.henry.base.controller.BaseController;
 import com.henry.base.domain.response.WrapResponse;
-import com.henry.domain.SignInRequest;
+import com.henry.domain.request.SignInRequest;
+import com.henry.domain.request.SignUpRequest;
 import com.henry.function.SignInFunc;
+import com.henry.function.SignUpFunc;
 import com.henry.function.UpdateUserPasswordFunc;
 import com.henry.request.user.UpdateUserPasswordRequest;
 import jakarta.validation.Valid;
@@ -22,6 +24,12 @@ public class AuthServerController extends BaseController {
     public CompletableFuture<WrapResponse<String>> signIn(@Valid @RequestBody SignInRequest request) {
         return CompletableFuture.supplyAsync(()
                 -> WrapResponse.ok(applicationContext.getBean(SignInFunc.class).exec(request)));
+    }
+
+    @PostMapping("/sign-up")
+    public CompletableFuture<WrapResponse<String>> signUp(@Valid @RequestBody SignUpRequest request) {
+        return CompletableFuture.supplyAsync(()
+                -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request)));
     }
 
     @PostMapping("/update-user-password")

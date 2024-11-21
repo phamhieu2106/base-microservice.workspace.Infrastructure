@@ -14,7 +14,10 @@ dependencies {
     implementation project(path: ':workspace:shared:shared-redis', configuration: 'default')
     implementation project(path: ':workspace:shared:shared-auth', configuration: 'default')
     implementation project(path: ':workspace:shared:shared-mvc', configuration: 'default')
+
     implementation project(path: ':workspace:auth-service:auth-shared', configuration: 'default')
+    implementation project(path: ':workspace:auth-service:auth-domain', configuration: 'default')
+
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 }
 
