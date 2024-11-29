@@ -2,6 +2,7 @@ package com.henry.domain;
 
 import com.henry.QueueConstant;
 import com.henry.base.BaseObjectLoggAble;
+import com.henry.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.MessagingException;

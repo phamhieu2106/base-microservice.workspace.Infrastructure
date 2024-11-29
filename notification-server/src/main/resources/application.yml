@@ -18,6 +18,12 @@ spring:
 server:
   port: 7003
 
+environment:
+  debug: true
 prefix:
   api: ${PREFIX_SERVER}
+
+henry:
+  notification-server:
+    api: localhost:7003
 
