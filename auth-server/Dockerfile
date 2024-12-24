@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-slim
 
-# Copy file JAR từ thư mục build/libs/
+# Copy file JAR từ thư mục com.henry.build/libs/
 COPY build/libs/auth-server-1.0.0.jar /app/auth-server.jar
 
 # Mở port cho service

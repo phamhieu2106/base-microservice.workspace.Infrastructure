@@ -7,7 +7,7 @@ import com.henry.domain.request.SignUpRequest;
 import com.henry.function.SignInFunc;
 import com.henry.function.SignUpFunc;
 import com.henry.function.UpdateUserPasswordFunc;
-import com.henry.request.user.UpdateUserPasswordRequest;
+import com.henry.request.UpdateUserPasswordRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

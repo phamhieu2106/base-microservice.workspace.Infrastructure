@@ -24,6 +24,7 @@ prefix:
   api: ${PREFIX_SERVER}
 
 henry:
-  notification-server:
-    api: localhost:7003
+
+
+
 

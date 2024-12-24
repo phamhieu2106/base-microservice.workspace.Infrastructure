@@ -2,7 +2,6 @@ package com.henry.function;
 
 import com.henry.base.exception.ServiceException;
 import com.henry.base.func.BaseFunc;
-import com.henry.constant.AuthErrorCode;
 import com.henry.domain.request.SignInRequest;
 import com.henry.util.JwtUtil;
 import lombok.RequiredArgsConstructor;

@@ -29,11 +29,13 @@ public class AuthServerConfig extends BaseObjectLoggAble {
         http.csrf(CsrfConfigurer::disable);
         if (IS_DEVELOP) {
             http
-                    .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                    .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         } else {
             http
-                    .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                    .authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/authenticate/**")
+                            .permitAll()
+                            .anyRequest().authenticated())
                     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .build();
         }
