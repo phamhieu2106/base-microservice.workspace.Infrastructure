@@ -28,7 +28,7 @@ jwt:
     key: ${JWT_SECRET_KEY}
 
 environment:
-  debug: false
+  debug: ${DEBUG}
 
 henry:
   auth-command:

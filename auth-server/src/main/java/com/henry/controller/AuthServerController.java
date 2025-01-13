@@ -6,8 +6,6 @@ import com.henry.domain.request.SignInRequest;
 import com.henry.domain.request.SignUpRequest;
 import com.henry.function.SignInFunc;
 import com.henry.function.SignUpFunc;
-import com.henry.function.UpdateUserPasswordFunc;
-import com.henry.request.UpdateUserPasswordRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,9 +30,4 @@ public class AuthServerController extends BaseController {
                 -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request)));
     }
 
-    @PostMapping("/update-user-password")
-    public CompletableFuture<WrapResponse<String>> updateUserPassword(@Valid @RequestBody UpdateUserPasswordRequest request) {
-        return CompletableFuture.supplyAsync(()
-                -> WrapResponse.ok(applicationContext.getBean(UpdateUserPasswordFunc.class).exec(request)));
-    }
 }

@@ -13,32 +13,30 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class AuthServerConfig extends BaseObjectLoggAble {
+public class ResourceConfig extends BaseObjectLoggAble {
 
     @Value("${environment.debug}")
     private boolean IS_DEVELOP;
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public AuthServerConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public ResourceConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable);
+
         if (IS_DEVELOP) {
-            http
-                    .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         } else {
-            http
-                    .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/authenticate/**")
-                            .permitAll()
-                            .anyRequest().authenticated())
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                    .build();
+            http.authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/authenticate/**").permitAll() // Public endpoints
+                            .anyRequest().authenticated()) // Secured endpoints
+                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         }
+
         return http.build();
     }
 }

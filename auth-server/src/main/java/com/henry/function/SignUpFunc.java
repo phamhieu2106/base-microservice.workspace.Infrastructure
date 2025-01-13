@@ -4,6 +4,7 @@ import com.henry.api.InternalAuthCommandApi;
 import com.henry.api.InternalAuthQueryApi;
 import com.henry.base.exception.ServiceException;
 import com.henry.base.func.BaseFunc;
+import com.henry.constant.AuthErrorCode;
 import com.henry.domain.request.SignUpRequest;
 import com.henry.request.CreateUserRequest;
 import com.henry.util.MappingUtils;
