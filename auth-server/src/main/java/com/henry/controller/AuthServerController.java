@@ -21,13 +21,13 @@ public class AuthServerController extends BaseController {
     @PostMapping("/sign-in")
     public CompletableFuture<WrapResponse<String>> signIn(@Valid @RequestBody SignInRequest request) {
         return CompletableFuture.supplyAsync(()
-                -> WrapResponse.ok(applicationContext.getBean(SignInFunc.class).exec(request)));
+                -> WrapResponse.ok(applicationContext.getBean(SignInFunc.class).exec(request)), executorService);
     }
 
     @PostMapping("/sign-up")
     public CompletableFuture<WrapResponse<String>> signUp(@Valid @RequestBody SignUpRequest request) {
         return CompletableFuture.supplyAsync(()
-                -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request)));
+                -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request)), executorService);
     }
 
 }

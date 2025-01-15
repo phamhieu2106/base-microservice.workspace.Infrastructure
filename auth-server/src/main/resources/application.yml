@@ -15,7 +15,6 @@ spring:
     url: jdbc:postgresql://${DOCKER_POSTGRES_URL}/henry-event?currentSchema=auth_event
     username: ${DOCKER_POSTGRES_USERNAME}
     password: ${DOCKER_POSTGRES_PASSWORD}
-
 server:
   port: 7001
 

@@ -24,7 +24,7 @@ public class SignInFunc extends BaseFunc {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
-            return jwtUtil.generateToken(authentication);
+            return jwtUtil.generateToken(authentication.getName());
         } catch (BadCredentialsException e) {
             logger.error(">>>>>> SignInFunc: {}", e.getMessage());
             throw new ServiceException(AuthErrorCode.USER_NOT_FOUND);
