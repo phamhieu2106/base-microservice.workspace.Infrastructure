@@ -12,9 +12,9 @@ spring:
     open-in-view: off
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DOCKER_POSTGRES_URL}/henry-event?currentSchema=auth_event
-    username: ${DOCKER_POSTGRES_USERNAME}
-    password: ${DOCKER_POSTGRES_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/henry-event?currentSchema=auth_event
+    username: henry
+    password: 123456
 server:
   port: 7001
 
