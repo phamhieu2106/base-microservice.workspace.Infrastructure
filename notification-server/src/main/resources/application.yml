@@ -12,16 +12,17 @@ spring:
     open-in-view: off
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DOCKER_POSTGRES_URL}/henry-event?currentSchema=notification_event
-    username: ${DOCKER_POSTGRES_USERNAME}
-    password: ${DOCKER_POSTGRES_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/henry-event?currentSchema=notification_event
+    username: henry
+    password: 123456
 server:
   port: 7003
 
-environment:
-  debug: true
 prefix:
-  api: ${PREFIX_SERVER}
+  api: ${prefixServer}
+
+environment:
+  debug: ${debug}
 
 henry:
 

@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: eureka-server
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+server:
+  port: 7002
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:7002/eureka/
+  server:
+    enableSelfPreservation: true
+
+environment:
+  debug: ${debug}

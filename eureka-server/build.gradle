@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.henry'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(path: ':workspace:1-shared:shared-base', configuration: 'default')
+
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+}
+
+test {
+    useJUnitPlatform()
+}
