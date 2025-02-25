@@ -18,13 +18,13 @@ public class SignUpFunc extends BaseFunc {
     private final InternalAuthCommandApi internalAuthCommandApi;
     private final InternalAuthQueryApi internalAuthQueryApi;
 
-    public String exec(SignUpRequest request) {
+    public String exec(SignUpRequest request, String currentUsername) {
         if (internalAuthQueryApi.exitByUsername(request.getUsername()).getData()) {
             throw new ServiceException(AuthErrorCode.USERNAME_EXIT);
         }
 
         CreateUserRequest createUserRequest = MappingUtils.mapObject(request, CreateUserRequest.class);
 
-        return internalAuthCommandApi.create(createUserRequest).getData();
+        return internalAuthCommandApi.create(createUserRequest, currentUsername).getData();
     }
 }

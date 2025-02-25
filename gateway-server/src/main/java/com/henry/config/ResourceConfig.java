@@ -1,32 +1,27 @@
 package com.henry.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.henry.filter.JwtAuthenticationWebFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebFluxSecurity
+@RequiredArgsConstructor
 public class ResourceConfig {
 
-    @Value("${environment.debug}")
-    private boolean IS_DEVELOP;
+    private final JwtAuthenticationWebFilter jwtAuthenticationFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(CsrfConfigurer::disable);
-
-        if (IS_DEVELOP) {
-            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
-        } else {
-            http.authorizeHttpRequests(auth -> auth
-                    .requestMatchers("").permitAll()
-                    .anyRequest().authenticated());
-        }
-
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        http.csrf(ServerHttpSecurity.CsrfSpec::disable);
+        http.authorizeExchange(auth -> auth
+                        .pathMatchers("/api/**", "/server/**").authenticated())
+                .addFilterBefore(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION);
         return http.build();
     }
 }

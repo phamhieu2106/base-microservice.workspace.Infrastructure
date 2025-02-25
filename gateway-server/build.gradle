@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation project(path: ':workspace:1-shared:shared-base', configuration: 'default')
+    implementation project(path: ':workspace:1-shared:shared-auth', configuration: 'default')
 
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
 //    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'

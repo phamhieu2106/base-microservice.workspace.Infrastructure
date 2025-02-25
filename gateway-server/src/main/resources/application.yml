@@ -8,12 +8,24 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
       - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-  cloud:
-    gateway:
-      routes:
 
 server:
   port: 7000
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+
+jwt:
+  secret:
+    key: ${jwtSecretKey}
+
+henry:
+  auth-query:
+    api: localhost:8003
 
 #eureka:
 #  instance:
@@ -21,6 +33,3 @@ server:
 #  client:
 #    serviceUrl:
 #      defaultZone: http://localhost:7002/eureka/
-
-environment:
-  debug: ${debug}
