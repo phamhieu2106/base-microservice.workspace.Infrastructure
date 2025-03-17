@@ -1,10 +1,11 @@
-FROM openjdk:17-jdk-slim
+# Stage 1: Build
+FROM gradle:8.10.1-jdk17 AS build
+WORKDIR /app
+COPY . .
+RUN gradle bootJar
 
-# Copy file JAR từ thư mục com.henry.build/libs/
-COPY build/libs/auth-server-1.0.0.jar /app/auth-server.jar
-
-# Mở port cho service
-EXPOSE 7001
-
-# Lệnh chạy ứng dụng
-ENTRYPOINT ["java", "-jar", "/app/auth-server.jar"]
+# Stage 2: Run
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/build/libs/auth-server.jar app.jar
+CMD ["java", "-jar", "app.jar"]
