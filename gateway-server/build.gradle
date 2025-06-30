@@ -6,7 +6,7 @@ ext {
     springCloudVersion = "2023.0.3"
 }
 
-group = 'com.henry'
+group = 'com.base'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
