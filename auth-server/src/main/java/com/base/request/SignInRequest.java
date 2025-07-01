@@ -1,7 +1,7 @@
 package com.base.request;
 
-import com.base.domain.request.BaseRequest;
 import com.base.constant.AuthErrorCode;
+import com.base.domain.request.BaseRequest;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -13,8 +13,6 @@ import lombok.*;
 public class SignInRequest extends BaseRequest {
     @NotBlank(message = AuthErrorCode.USER_USERNAME_EMPTY)
     private String username;
-    private String email;
-    private String phoneNumber;
     @NotBlank(message = AuthErrorCode.PASSWORD_EMPTY)
     private String password;
 }

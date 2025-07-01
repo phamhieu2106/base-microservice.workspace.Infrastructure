@@ -26,7 +26,7 @@ public class AuthenticateResource extends BaseController {
     @PostMapping("/sign-up")
     public CompletableFuture<WrapResponse<String>> signUp(@Valid @RequestBody SignUpRequest request) {
         return CompletableFuture.supplyAsync(()
-                -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request, "guest")), executorService);
+                -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request)), executorService);
     }
 
 }
