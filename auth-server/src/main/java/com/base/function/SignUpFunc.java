@@ -2,8 +2,8 @@ package com.base.function;
 
 import com.base.api.InternalAuthCommandApi;
 import com.base.api.InternalAuthQueryApi;
-import com.base.base.exception.ServiceException;
-import com.base.base.func.BaseFunc;
+import com.base.exception.ServiceException;
+import com.base.func.BaseFunc;
 import com.base.constant.AuthErrorCode;
 import com.base.request.SignUpRequest;
 import com.base.request.CreateUserRequest;

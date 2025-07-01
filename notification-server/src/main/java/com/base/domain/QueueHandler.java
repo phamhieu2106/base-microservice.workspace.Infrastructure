@@ -1,7 +1,7 @@
 package com.base.domain;
 
 import com.base.QueueConstant;
-import com.base.base.BaseObjectLoggAble;
+import com.base.BaseObjectLoggAble;
 import com.base.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

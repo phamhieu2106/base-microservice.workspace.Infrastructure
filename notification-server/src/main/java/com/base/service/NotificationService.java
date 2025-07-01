@@ -1,7 +1,7 @@
 package com.base.service;
 
-import com.base.base.BaseObjectLoggAble;
-import com.base.base.exception.ServiceException;
+import com.base.BaseObjectLoggAble;
+import com.base.exception.ServiceException;
 import com.base.domain.entity.NotificationEntity;
 import com.base.repository.NotificationRepository;
 import com.base.request.constant.NotificationErrorCode;

@@ -1,7 +1,7 @@
 package com.base.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.base.base.domain.response.WrapResponse;
+import com.base.domain.response.WrapResponse;
 import com.base.service.UserDetailsServiceConfig;
 import com.base.util.JwtUtil;
 import lombok.NonNull;

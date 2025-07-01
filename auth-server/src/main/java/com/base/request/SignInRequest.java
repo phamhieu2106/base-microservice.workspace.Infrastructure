@@ -1,6 +1,6 @@
 package com.base.request;
 
-import com.base.base.domain.request.BaseRequest;
+import com.base.domain.request.BaseRequest;
 import com.base.constant.AuthErrorCode;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

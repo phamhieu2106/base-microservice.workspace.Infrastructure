@@ -1,7 +1,6 @@
 package com.base.controller;
 
-import com.base.base.controller.BaseController;
-import com.base.base.domain.response.WrapResponse;
+import com.base.domain.response.WrapResponse;
 import com.base.request.SignInRequest;
 import com.base.request.SignUpRequest;
 import com.base.function.SignInFunc;
