@@ -36,7 +36,7 @@ public class ResourceConfig {
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         } else {
             http.authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/server/auth-server/authenticate/**").permitAll() // Adjusted path
+                            .requestMatchers("/authenticate/**").permitAll() // Adjusted path
                             .anyRequest().authenticated())
                     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         }

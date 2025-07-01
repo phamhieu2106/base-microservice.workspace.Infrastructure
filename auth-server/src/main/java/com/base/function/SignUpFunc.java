@@ -5,7 +5,7 @@ import com.base.api.InternalAuthQueryApi;
 import com.base.base.exception.ServiceException;
 import com.base.base.func.BaseFunc;
 import com.base.constant.AuthErrorCode;
-import com.base.domain.request.SignUpRequest;
+import com.base.request.SignUpRequest;
 import com.base.request.CreateUserRequest;
 import com.base.util.MappingUtils;
 import lombok.RequiredArgsConstructor;

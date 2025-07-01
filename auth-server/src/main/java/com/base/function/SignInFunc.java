@@ -3,7 +3,7 @@ package com.base.function;
 import com.base.base.exception.ServiceException;
 import com.base.base.func.BaseFunc;
 import com.base.constant.AuthErrorCode;
-import com.base.domain.request.SignInRequest;
+import com.base.request.SignInRequest;
 import com.base.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

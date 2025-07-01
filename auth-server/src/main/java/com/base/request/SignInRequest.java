@@ -1,4 +1,4 @@
-package com.base.domain.request;
+package com.base.request;
 
 import com.base.base.domain.request.BaseRequest;
 import com.base.constant.AuthErrorCode;
