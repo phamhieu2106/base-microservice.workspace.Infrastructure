@@ -1,10 +1,10 @@
-package com.base.controller;
+package com.base.resource;
 
 import com.base.domain.response.WrapResponse;
-import com.base.request.SignInRequest;
-import com.base.request.SignUpRequest;
 import com.base.function.SignInFunc;
 import com.base.function.SignUpFunc;
+import com.base.request.SignInRequest;
+import com.base.request.SignUpRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping("/${spring.application.name}/authenticate")
-public class AuthServerController extends BaseController {
+@RequestMapping("/authenticate")
+public class AuthenticateResource extends BaseController {
 
     @PostMapping("/sign-in")
     public CompletableFuture<WrapResponse<String>> signIn(@Valid @RequestBody SignInRequest request) {

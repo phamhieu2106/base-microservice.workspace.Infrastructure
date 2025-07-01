@@ -1,8 +1,8 @@
-package com.base.controller.internal;
+package com.base.resource.internal;
 
-import com.base.controller.BaseController;
 import com.base.domain.response.WrapResponse;
 import com.base.request.domain.CreateNotificationRequest;
+import com.base.resource.BaseController;
 import com.base.service.NotificationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

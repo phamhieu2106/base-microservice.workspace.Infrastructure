@@ -12,25 +12,13 @@ spring:
     open-in-view: off
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/henry-event?currentSchema=auth_event
+    url: jdbc:postgresql://localhost:5432/base-event?currentSchema=auth_event
     username: henry
     password: 123456
 server:
   port: 7001
 
+base:
+  environment:
+    debug: true
 
-prefix:
-  api: ${PREFIX_SERVER}
-
-jwt:
-  secret:
-    key: ${JWT_SECRET_KEY}
-
-environment:
-  debug: ${DEBUG}
-
-henry:
-  auth-command:
-    api: localhost:8001
-  auth-query:
-    api: localhost:8003
