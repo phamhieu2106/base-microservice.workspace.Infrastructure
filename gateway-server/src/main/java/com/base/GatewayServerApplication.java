@@ -8,7 +8,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class GatewayServerApplication {
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(GatewayServerApplication.class);
-        application.run(args);
+        SpringApplication.run(GatewayServerApplication.class, args);
     }
 }

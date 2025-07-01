@@ -12,24 +12,3 @@ spring:
 server:
   port: 7000
 
-
-logging:
-  level:
-    org:
-      springframework:
-        security: debug
-
-jwt:
-  secret:
-    key: ${jwtSecretKey}
-
-henry:
-  auth-query:
-    api: localhost:8003
-
-#eureka:
-#  instance:
-#    hostname: localhost
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:7002/eureka/
