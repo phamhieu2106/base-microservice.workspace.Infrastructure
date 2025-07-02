@@ -21,7 +21,7 @@ public class AuthServerApplication {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.base.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.base.resource"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(new ApiInfoBuilder().version("1.0").title("Auth Server API").description("Auth Server API v1.0").build());
