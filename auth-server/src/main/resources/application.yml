@@ -15,10 +15,17 @@ spring:
     url: jdbc:postgresql://localhost:5432/base-event?currentSchema=auth_event
     username: base
     password: 123456
+  elasticsearch:
+    uris: http://localhost:9200
+  data:
+    redis:
+      host: localhost
+      port: 6379
 server:
   port: 7001
 
 base:
   environment:
     debug: true
-
+  jwt:
+    secret-key: 101ffa4dc2dc4b3e08852eca9eecad49

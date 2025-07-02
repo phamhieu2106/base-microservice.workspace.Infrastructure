@@ -10,7 +10,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation project(path: ':workspace:1-shared:shared-base', configuration: 'default')
     implementation project(path: ':workspace:1-shared:shared-redis', configuration: 'default')
     implementation project(path: ':workspace:1-shared:shared-rabbitmq', configuration: 'default')
