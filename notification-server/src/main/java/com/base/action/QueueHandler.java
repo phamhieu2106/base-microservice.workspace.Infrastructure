@@ -1,7 +1,8 @@
-package com.base.domain;
+package com.base.action;
 
-import com.base.QueueConstant;
 import com.base.BaseObjectLoggAble;
+import com.base.QueueConstant;
+import com.base.request.SignUpRequest;
 import com.base.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -21,5 +22,10 @@ public class QueueHandler extends BaseObjectLoggAble {
         } catch (MessagingException e) {
             logger.error(e.getMessage());
         }
+    }
+
+    @RabbitListener(queues = QueueConstant.QUEUE_USER_CONFIRM_ACTIVE)
+    private void handleSignUpUser(SignUpRequest request) {
+        notificationService.sendUserEmailConfirmActive(request);
     }
 }

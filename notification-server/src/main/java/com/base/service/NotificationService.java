@@ -1,9 +1,10 @@
 package com.base.service;
 
 import com.base.BaseObjectLoggAble;
-import com.base.exception.ServiceException;
 import com.base.domain.entity.NotificationEntity;
+import com.base.exception.ServiceException;
 import com.base.repository.NotificationRepository;
+import com.base.request.SignUpRequest;
 import com.base.request.constant.NotificationErrorCode;
 import com.base.request.constant.NotificationStatus;
 import com.base.request.domain.CreateNotificationRequest;
@@ -68,5 +69,9 @@ public class NotificationService extends BaseObjectLoggAble {
 
     public void sendUserEmailConfirmActive(String username) throws MessagingException {
         logger.info("Bấm vào đường link ${123} để xác thực user {}", username);
+    }
+
+    public void sendUserEmailConfirmActive(SignUpRequest request) {
+        logger.info("Bấm vào đường link ${} để xác thực user {}", request.getTokenConfirm(), request.getUsername());
     }
 }

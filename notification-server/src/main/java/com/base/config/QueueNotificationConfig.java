@@ -13,4 +13,9 @@ public class QueueNotificationConfig {
     public Queue userConfirmActiveQueue() {
         return QueueBuilder.durable(QueueConstant.QUEUE_USER_CONFIRM_ACTIVE).build();
     }
+
+    @Bean
+    public Queue queueHandleSignUpUser() {
+        return QueueBuilder.durable(QueueConstant.QUEUE_USER_SIGN_UP).build();
+    }
 }
