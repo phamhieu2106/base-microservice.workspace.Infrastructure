@@ -1,6 +1,8 @@
 spring:
   application:
     name: gateway-server
+  messages:
+    basename: vi
   main:
     web-application-type: reactive
     allow-bean-definition-overriding: true
@@ -8,7 +10,24 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
       - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-
+  elasticsearch:
+    uris: http://localhost:9200
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cloud:
+    gateway:
+      routes:
+        - id: auth-server
+          uri: http://localhost:7001
+          predicates:
+            - Path=/auth-server/**
+          filters:
+            - StripPrefix=1
 server:
   port: 7000
 
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG

@@ -15,7 +15,7 @@ dependencies {
     implementation project(path: ':workspace:1-shared:shared-rabbitmq', configuration: 'default')
     implementation project(path: ':workspace:1-shared:shared-notification', configuration: 'default')
     implementation project(path: ':workspace:1-shared:shared-auth', configuration: 'default')
-
+    implementation project(path: ':workspace:1-shared:shared-proto', configuration: 'default')
     implementation project(path: ':workspace:auth-service:auth-shared', configuration: 'default')
 
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
