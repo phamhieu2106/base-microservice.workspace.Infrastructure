@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:7001/issuer
   application:
     name: gateway-server
   messages:
@@ -30,11 +35,6 @@ spring:
             - Path=/auth-server/**
           filters:
             - StripPrefix=1
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 5
-                redis-rate-limiter.burstCapacity: 10
-
         #SERVICE
         - id: auth-command
           uri: http://localhost:8001
@@ -56,5 +56,7 @@ logging:
     org.springframework.cloud.gateway: DEBUG
 
 base:
-  environment:
-    debug: true
+  permit:
+    uri: /auth-server
+  jwt:
+    secret: 19acfb0497b4fecf1ae7ab0e3c642e85
