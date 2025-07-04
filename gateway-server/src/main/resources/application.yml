@@ -18,6 +18,10 @@ spring:
       port: 6379
   cloud:
     gateway:
+      httpclient:
+        pool:
+          max-connections: 500
+          acquireTimeout: 10000
       routes:
         #SERVER
         - id: auth-server
@@ -26,6 +30,11 @@ spring:
             - Path=/auth-server/**
           filters:
             - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+
         #SERVICE
         - id: auth-command
           uri: http://localhost:8001
@@ -45,3 +54,7 @@ server:
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+
+base:
+  environment:
+    debug: true

@@ -33,11 +33,10 @@ public class SignUpFunc extends BaseFunc {
     private String runInternal(SignUpRequest request, String username) {
         String tokenConfirm = GenerateUtils.generateUUID();
         try {
-            cacheUtils.storeKeyWithMinutes(CommonConstant.AuthCacheKey.IN_WAITING_ACTIVE_USERNAME + "-" + tokenConfirm,
-                    ObjectMapperUtils.mapObjectToString(request), 10);
+            cacheUtils.storeKeyWithMinutes(tokenConfirm, ObjectMapperUtils.mapObjectToString(request), 10);
         } catch (JsonProcessingException e) {
             logger.error(">>>> JsonProcessingException Cache sign-up request failed with request={}", request, e);
-            throw new ServiceException(AuthErrorCode.CACHE_USER_FAIL);
+            throw new ServiceException(AuthErrorCode.CACHE_TOKEN_USER_CONFIRM_FAIL);
         }
 
         request.setTokenConfirm(tokenConfirm);

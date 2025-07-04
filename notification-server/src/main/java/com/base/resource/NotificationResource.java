@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/${prefix.api}/${spring.application.name}/notifications")
-public class NotificationController extends BaseController {
+public class NotificationResource extends BaseResource {
 
     private final NotificationService notificationService;
 
