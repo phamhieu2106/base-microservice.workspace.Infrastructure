@@ -33,6 +33,9 @@ base:
     expiration: 900000
 grpc:
   client:
+    auth-command:
+      address: static://localhost:8011
+      negotiation-type: PLAINTEXT
     auth-query:
       address: static://localhost:8013
       negotiation-type: PLAINTEXT

@@ -1,24 +1,32 @@
 package com.base.function;
 
 import com.base.CacheUtils;
-import com.base.QueueConstant;
 import com.base.common.CommonConstant;
 import com.base.constant.AuthErrorCode;
 import com.base.exception.ServiceException;
 import com.base.func.BaseFunc;
+import com.base.grpc.InternalUserServiceGrpc;
+import com.base.grpc.InternalUserServiceOuterClass;
 import com.base.request.SignUpRequest;
-import com.base.util.GenerateUtils;
-import com.base.util.QueueUtils;
-import com.base.utils.ObjectMapperUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.RequiredArgsConstructor;
+import com.base.util.MappingUtils;
+import com.base.utils.JwtUtils;
+import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class SignUpFunc extends BaseFunc {
 
+    @SuppressWarnings("unused")
+    @GrpcClient("auth-command")
+    private InternalUserServiceGrpc.InternalUserServiceBlockingStub internalUserServiceBlockingStub;
+
     private final CacheUtils cacheUtils;
+    private final JwtUtils jwtUtils;
+
+    public SignUpFunc(CacheUtils cacheUtils, JwtUtils jwtUtils) {
+        this.cacheUtils = cacheUtils;
+        this.jwtUtils = jwtUtils;
+    }
 
     public String exec(SignUpRequest request) {
         String username = request.getUsername();
@@ -31,21 +39,11 @@ public class SignUpFunc extends BaseFunc {
     }
 
     private String runInternal(SignUpRequest request, String username) {
-        String tokenConfirm = GenerateUtils.generateUUID();
-        try {
-            cacheUtils.storeKeyWithMinutes(tokenConfirm, ObjectMapperUtils.mapObjectToString(request), 10);
-        } catch (JsonProcessingException e) {
-            logger.error(">>>> JsonProcessingException Cache sign-up request failed with request={}", request, e);
-            throw new ServiceException(AuthErrorCode.CACHE_TOKEN_USER_CONFIRM_FAIL);
-        }
+        String tokenConfirm = jwtUtils.generateToken(username);
+        cacheUtils.storeKeyWithMinutes(tokenConfirm, username, 15);
 
-        request.setTokenConfirm(tokenConfirm);
-        sendQueueNotificationSignUpUser(request);
-
-        return username;
-    }
-
-    private void sendQueueNotificationSignUpUser(SignUpRequest request) {
-        QueueUtils.sendQueue(QueueConstant.QUEUE_USER_SIGN_UP, request);
+        InternalUserServiceOuterClass.CreateUserRequest createUserRequest = MappingUtils.mapObject(request, InternalUserServiceOuterClass.CreateUserRequest.class);
+        internalUserServiceBlockingStub.createUser(createUserRequest);
+        return tokenConfirm;
     }
 }
