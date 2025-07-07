@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping("/authenticate")
+@RequestMapping("oauth/authenticate")
 public class AuthenticateResource extends BaseResource {
 
     @PostMapping("/sign-in")

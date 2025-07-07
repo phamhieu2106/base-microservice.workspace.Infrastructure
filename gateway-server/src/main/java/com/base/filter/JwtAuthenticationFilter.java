@@ -1,9 +1,10 @@
 package com.base.filter;
 
+import com.base.utils.JwtUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,10 @@ import reactor.core.publisher.Mono;
 import java.util.Arrays;
 
 @Component
-public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
+@RequiredArgsConstructor
+public class JwtAuthenticationFilter implements GlobalFilter {
 
-    @Value("${base.jwt.secret}")
-    private String JWT_SECRET;
+    private final JwtUtils jwtUtils;
 
     @Value("${base.permit.uri:}")
     private String PERMIT_URI;
@@ -40,26 +41,18 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
 
         String jwt = authHeader.substring(7);
 
-        // TODO: Validate JWT. Có thể sử dụng thư viện JWT như io.jsonwebtoken hoặc java-jwt
-        if (!isValidJwt(jwt)) {
+        if (!jwtUtils.isValidToken(jwt)) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
         }
 
-        // Có thể inject thêm info user vào header nếu cần
-        // exchange.getRequest().mutate().header("user-id", ...);
+        exchange.getRequest().getHeaders().set(HttpHeaders.AUTHORIZATION, "Bearer " + jwt);
 
         return chain.filter(exchange);
     }
-
-    private boolean isValidJwt(String jwt) {
-        // TODO: Validate JWT logic ở đây (giải mã, check chữ ký, check hết hạn)
-        // Để demo, tạm luôn true
-        return true;
-    }
-
-    @Override
-    public int getOrder() {
-        return -1;
-    }
+//
+//    @Override
+//    public int getOrder() {
+//        return -1;
+//    }
 }

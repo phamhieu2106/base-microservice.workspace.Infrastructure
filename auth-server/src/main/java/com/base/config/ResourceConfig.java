@@ -23,7 +23,7 @@ public class ResourceConfig {
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         } else {
             http.authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/authenticate/**").permitAll()
+                    .requestMatchers("oauth/authenticate/**").permitAll()
                     .anyRequest().authenticated());
         }
 

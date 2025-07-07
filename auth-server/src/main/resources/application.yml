@@ -25,9 +25,15 @@ spring:
       port: 6379
 server:
   port: 7001
-
 base:
   environment:
     debug: true
   jwt:
-    secret-key: 101ffa4dc2dc4b3e08852eca9eecad49
+    secret-key: 832c44b8a1935544ae6265c15261825468078fc965312afa74945edab0051bea
+    expiration: 900000
+grpc:
+  client:
+    auth-query:
+      address: static://localhost:8013
+      negotiation-type: PLAINTEXT
+

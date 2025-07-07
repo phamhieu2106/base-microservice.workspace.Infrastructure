@@ -28,13 +28,6 @@ spring:
           max-connections: 500
           acquireTimeout: 10000
       routes:
-        #SERVER
-        - id: auth-server
-          uri: http://localhost:7001
-          predicates:
-            - Path=/auth-server/**
-          filters:
-            - StripPrefix=1
         #SERVICE
         - id: auth-command
           uri: http://localhost:8001
@@ -56,7 +49,6 @@ logging:
     org.springframework.cloud.gateway: DEBUG
 
 base:
-  permit:
-    uri: /auth-server
   jwt:
-    secret: 19acfb0497b4fecf1ae7ab0e3c642e85
+    secret-key: 832c44b8a1935544ae6265c15261825468078fc965312afa74945edab0051bea
+    expiration: 900000
