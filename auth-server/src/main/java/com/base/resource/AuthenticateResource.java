@@ -27,10 +27,15 @@ public class AuthenticateResource extends BaseResource {
                 -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request)), executorService);
     }
 
-    @PostMapping("/confirm-active/{confirmToken}")
-    public CompletableFuture<WrapResponse<SignUpRequest>> confirm(@PathVariable String confirmToken) {
+    @GetMapping("/confirm-active/{token}")
+    public CompletableFuture<WrapResponse<Boolean>> confirm(@PathVariable String token) {
         return CompletableFuture.supplyAsync(()
-                -> WrapResponse.ok(applicationContext.getBean(ConfirmActiveUserFunc.class).exec(confirmToken)), executorService);
+                -> WrapResponse.ok(applicationContext.getBean(ConfirmActiveUserFunc.class).exec(token)), executorService);
     }
 
+    @PutMapping("/update-password/{username}")
+    public CompletableFuture<WrapResponse<Boolean>> updatePassword(@PathVariable String username) {
+        return CompletableFuture.supplyAsync(()
+                -> WrapResponse.ok(applicationContext.getBean(ConfirmActiveUserFunc.class).exec(username)), executorService);
+    }
 }

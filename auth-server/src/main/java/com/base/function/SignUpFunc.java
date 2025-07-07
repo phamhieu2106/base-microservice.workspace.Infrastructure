@@ -9,6 +9,7 @@ import com.base.grpc.InternalUserServiceGrpc;
 import com.base.grpc.InternalUserServiceOuterClass;
 import com.base.request.SignUpRequest;
 import com.base.util.MappingUtils;
+import com.base.utils.GrpcHandlerUtils;
 import com.base.utils.JwtUtils;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Component;
@@ -39,11 +40,14 @@ public class SignUpFunc extends BaseFunc {
     }
 
     private String runInternal(SignUpRequest request, String username) {
-        String tokenConfirm = jwtUtils.generateToken(username);
-        cacheUtils.storeKeyWithMinutes(tokenConfirm, username, 15);
+        String token = jwtUtils.generateToken(username);
+        cacheUtils.storeKeyWithMinutes(token, username, 15);
+        request.setToken(token);
+        GrpcHandlerUtils.callInternal(() -> {
+            InternalUserServiceOuterClass.CreateUserRequest createUserRequest = MappingUtils.mapObject(request, InternalUserServiceOuterClass.CreateUserRequest.class);
+            return internalUserServiceBlockingStub.createUser(createUserRequest);
+        });
 
-        InternalUserServiceOuterClass.CreateUserRequest createUserRequest = MappingUtils.mapObject(request, InternalUserServiceOuterClass.CreateUserRequest.class);
-        internalUserServiceBlockingStub.createUser(createUserRequest);
-        return tokenConfirm;
+        return token;
     }
 }
