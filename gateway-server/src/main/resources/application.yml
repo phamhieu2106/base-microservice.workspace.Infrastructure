@@ -50,5 +50,6 @@ logging:
 
 base:
   jwt:
+    internal-key: 0076274cba6f9d492a1e8b9c483648468f6baa0cb85b0b6e7f8b712be14c1ddf
     secret-key: 832c44b8a1935544ae6265c15261825468078fc965312afa74945edab0051bea
     expiration: 900000

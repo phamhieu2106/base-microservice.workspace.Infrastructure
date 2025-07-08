@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class SignInFunc extends BaseFunc {
 
     public String exec(SignInRequest request) {
         UserDetailResponse userDetailResponse = getUserDetailResponse(request);
-        if (List.of(UserStatus.BLOCKED, UserStatus.INACTIVE).contains(userDetailResponse.getStatus())) {
+        if (Objects.equals(UserStatus.BLOCKED, userDetailResponse.getStatus())) {
             throw new ServiceException(AuthErrorCode.USER_BLOCKED);
         }
 
@@ -44,7 +44,7 @@ public class SignInFunc extends BaseFunc {
 
         InternalUserServiceOuterClass.UserView userView = GrpcHandlerUtils.callInternal(()
                 -> internalUserServiceBlockingStub.findUserByUsernameAndPassword(internalRequest));
-        
+
         return MappingUtils.mapObject(userView, UserDetailResponse.class);
     }
 }

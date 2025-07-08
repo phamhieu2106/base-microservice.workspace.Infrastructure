@@ -21,6 +21,8 @@ public class JwtAuthenticationFilter implements GlobalFilter {
 
     @Value("${base.permit.uri:}")
     private String PERMIT_URI;
+    @Value("${base.jwt.internal-key:}")
+    private String INTERNAL_KEY;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -47,6 +49,7 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         }
 
         exchange.getRequest().getHeaders().set(HttpHeaders.AUTHORIZATION, "Bearer " + jwt);
+        exchange.getRequest().getHeaders().set("X-Internal-Secret", INTERNAL_KEY);
 
         return chain.filter(exchange);
     }

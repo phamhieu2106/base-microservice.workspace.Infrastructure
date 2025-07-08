@@ -2,10 +2,12 @@ package com.base.resource;
 
 import com.base.domain.response.WrapResponse;
 import com.base.function.ConfirmActiveUserFunc;
+import com.base.function.ConfirmUpdateUserPasswordFunc;
 import com.base.function.SignInFunc;
 import com.base.function.SignUpFunc;
 import com.base.request.SignInRequest;
 import com.base.request.SignUpRequest;
+import com.base.request.UpdateUserPasswordRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,9 +35,10 @@ public class AuthenticateResource extends BaseResource {
                 -> WrapResponse.ok(applicationContext.getBean(ConfirmActiveUserFunc.class).exec(token)), executorService);
     }
 
-    @PutMapping("/update-password/{username}")
-    public CompletableFuture<WrapResponse<Boolean>> updatePassword(@PathVariable String username) {
+    @PutMapping("/confirm-update-password/{token}")
+    public CompletableFuture<WrapResponse<Boolean>> confirmUpdateUserPassword(@Valid @RequestBody UpdateUserPasswordRequest request,
+                                                                              @PathVariable String token) {
         return CompletableFuture.supplyAsync(()
-                -> WrapResponse.ok(applicationContext.getBean(ConfirmActiveUserFunc.class).exec(username)), executorService);
+                -> WrapResponse.ok(applicationContext.getBean(ConfirmUpdateUserPasswordFunc.class).exec(request, token)), executorService);
     }
 }
