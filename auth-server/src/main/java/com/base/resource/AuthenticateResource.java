@@ -1,10 +1,8 @@
 package com.base.resource;
 
 import com.base.domain.response.WrapResponse;
-import com.base.function.ConfirmActiveUserFunc;
-import com.base.function.ConfirmUpdateUserPasswordFunc;
-import com.base.function.SignInFunc;
-import com.base.function.SignUpFunc;
+import com.base.function.*;
+import com.base.request.ForgotUserPasswordRequest;
 import com.base.request.SignInRequest;
 import com.base.request.SignUpRequest;
 import com.base.request.UpdateUserPasswordRequest;
@@ -27,6 +25,12 @@ public class AuthenticateResource extends BaseResource {
     public CompletableFuture<WrapResponse<String>> signUp(@Valid @RequestBody SignUpRequest request) {
         return CompletableFuture.supplyAsync(()
                 -> WrapResponse.ok(applicationContext.getBean(SignUpFunc.class).exec(request)), executorService);
+    }
+
+    @PostMapping("/forgot-password")
+    public CompletableFuture<WrapResponse<Boolean>> forgotPassword(@Valid @RequestBody ForgotUserPasswordRequest request) {
+        return CompletableFuture.supplyAsync(()
+                -> WrapResponse.ok(applicationContext.getBean(ForgotUserPasswordFunc.class).exec(request)), executorService);
     }
 
     @GetMapping("/confirm-active/{token}")

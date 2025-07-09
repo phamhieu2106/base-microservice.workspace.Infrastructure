@@ -41,8 +41,17 @@ public class SignUpFunc extends BaseFunc {
 
     private String runInternal(SignUpRequest request, String username) {
         String token = jwtUtils.generateToken(username);
-        cacheUtils.storeKeyWithHours(token, username, 24);
         request.setToken(token);
+
+        createInactiveUser(username, request);
+
+        cacheUtils.storeKeyWithHours(token, username, 24);
+        cacheUtils.addToSet(CommonConstant.AuthCacheKey.INACTIVE_USERNAME, username);
+
+        return token;
+    }
+
+    private void createInactiveUser(String username, SignUpRequest request) {
         GrpcHandlerUtils.callInternal(() -> {
             InternalUserServiceOuterClass.CreateUserRequest.Builder builder =
                     InternalUserServiceOuterClass.CreateUserRequest.newBuilder()
@@ -65,9 +74,5 @@ public class SignUpFunc extends BaseFunc {
 
             return internalUserServiceBlockingStub.createUser(createUserRequest);
         });
-
-        cacheUtils.addToSet(CommonConstant.AuthCacheKey.INACTIVE_USERNAME, username);
-
-        return token;
     }
 }

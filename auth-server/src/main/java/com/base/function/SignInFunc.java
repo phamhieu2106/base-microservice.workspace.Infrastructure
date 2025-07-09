@@ -13,6 +13,7 @@ import com.base.utils.GrpcHandlerUtils;
 import com.base.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -25,6 +26,7 @@ public class SignInFunc extends BaseFunc {
     @GrpcClient("auth-query")
     private InternalUserServiceGrpc.InternalUserServiceBlockingStub internalUserServiceBlockingStub;
 
+    private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
 
     public String exec(SignInRequest request) {
@@ -39,7 +41,7 @@ public class SignInFunc extends BaseFunc {
     private UserDetailResponse getUserDetailResponse(SignInRequest request) {
         InternalUserServiceOuterClass.FindUserByUsernameAndPasswordRequest internalRequest = InternalUserServiceOuterClass.FindUserByUsernameAndPasswordRequest.newBuilder()
                 .setUsername(request.getUsername())
-                .setPassword(request.getPassword())
+                .setPassword(passwordEncoder.encode(request.getPassword()))
                 .build();
 
         InternalUserServiceOuterClass.UserView userView = GrpcHandlerUtils.callInternal(()

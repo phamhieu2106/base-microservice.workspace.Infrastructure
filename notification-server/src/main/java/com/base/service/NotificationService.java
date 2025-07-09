@@ -1,15 +1,15 @@
 package com.base.service;
 
 import com.base.BaseObjectLoggAble;
+import com.base.constant.NotificationErrorCode;
+import com.base.constant.NotificationStatus;
+import com.base.domain.CreateNotificationRequest;
+import com.base.domain.NotificationResponse;
+import com.base.domain.QueryNotificationRequest;
 import com.base.domain.entity.NotificationEntity;
 import com.base.exception.ServiceException;
 import com.base.repository.NotificationRepository;
 import com.base.request.SignUpRequest;
-import com.base.request.constant.NotificationErrorCode;
-import com.base.request.constant.NotificationStatus;
-import com.base.request.domain.CreateNotificationRequest;
-import com.base.request.domain.NotificationResponse;
-import com.base.request.domain.QueryNotificationRequest;
 import com.base.util.MappingUtils;
 import com.base.util.PageableUtils;
 import lombok.RequiredArgsConstructor;
@@ -72,6 +72,6 @@ public class NotificationService extends BaseObjectLoggAble {
     }
 
     public void sendUserEmailConfirmActive(SignUpRequest request) {
-        logger.info("Bấm vào đường link ${} để xác thực user {}", request.getTokenConfirm(), request.getUsername());
+//        logger.info("Bấm vào đường link ${} để xác thực user {}", request.getTokenConfirm(), request.getUsername());
     }
 }

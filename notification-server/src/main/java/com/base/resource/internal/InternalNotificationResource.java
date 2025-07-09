@@ -1,7 +1,7 @@
 package com.base.resource.internal;
 
+import com.base.domain.CreateNotificationRequest;
 import com.base.domain.response.WrapResponse;
-import com.base.request.domain.CreateNotificationRequest;
 import com.base.resource.BaseResource;
 import com.base.service.NotificationService;
 import jakarta.validation.Valid;

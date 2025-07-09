@@ -1,8 +1,8 @@
 package com.base.resource;
 
+import com.base.domain.NotificationResponse;
+import com.base.domain.QueryNotificationRequest;
 import com.base.domain.response.WrapResponse;
-import com.base.request.domain.NotificationResponse;
-import com.base.request.domain.QueryNotificationRequest;
 import com.base.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
